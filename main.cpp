@@ -1,9 +1,10 @@
 #include <spdlog/spdlog.h>
 #include <memory>
 
+#include "pipeline.hpp"
 #include "controller.hpp"
 #include "defs.hpp"
-#include "pipeline.hpp"
+#include "pipeline/test_pattern_pipeline.hpp"
 
 using namespace deadeye;
 
@@ -22,7 +23,7 @@ int main(int argc, char** argv) {
     Controller::Initialize({
         std::make_unique<TestPatternPipeline>(0),
         std::make_unique<TestPatternPipeline>(1),
-        std::make_unique<TestPatternPipeline>(2),
+        std::make_unique<ded::NullPipeline>(2),
         // std::make_unique<TestPatternPipeline>(3),
         // std::make_unique<TestPatternPipeline>(4),
     });
