@@ -12,6 +12,7 @@ add_subdirectory(deadeye/daemon)
 # Build main target
 add_executable(ded
     main.cpp
+    pipeline.cpp
 )
 set_target_properties(ded PROPERTIES
   OUTPUT_NAME ded

@@ -1,21 +1,24 @@
 #pragma once
+
 #include "config/pipeline_config.hpp"
 #include "config/stream_config.hpp"
-#include "pipeline/pipeline.hpp"
+#include "pipeline/abstract_pipeline.hpp"
+
+using namespace deadeye;
 
 namespace ded {
-class NullPipeline : public deadeye::Pipeline {
+class TestPatternPipeline : public AbstractPipeline {
  public:
-  NullPipeline(int inum) : deadeye::Pipeline{inum} {}
-  void CancelTask() override {}
-  void UpdateConfig(deadeye::PipelineConfig *) override {}
-  void UpdateStream(deadeye::StreamConfig *) override {}
-  void Run() override { spdlog::warn("{}: Run not implemented", *this); }
+  TestPatternPipeline(int inum) : AbstractPipeline{inum} {}
 
  protected:
-  virtual std::string ToString() const override {
-    return "ded::NullPipeline<" + std::to_string(inum_) + ">";
-  }
+  virtual cv::VideoCapture GetVideoCapture() override;
+
+  virtual void FilterContours(
+      std::vector<std::vector<cv::Point>> const &src,
+      std::vector<std::vector<cv::Point>> &dest) override;
+
+  virtual std::string ToString() const override;
 };
 
 }  // namespace ded
