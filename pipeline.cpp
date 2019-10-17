@@ -1,6 +1,8 @@
 #include "pipeline.hpp"
 
 #include <opencv2/opencv.hpp>
+#include "config/pipeline_config.hpp"
+#include "config/stream_config.hpp"
 
 using namespace ded;
 

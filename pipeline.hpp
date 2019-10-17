@@ -1,7 +1,5 @@
 #pragma once
 
-#include "config/pipeline_config.hpp"
-#include "config/stream_config.hpp"
 #include "pipeline/abstract_pipeline.hpp"
 
 using namespace deadeye;
