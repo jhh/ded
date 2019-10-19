@@ -1,13 +1,10 @@
 #include <spdlog/spdlog.h>
-#include <memory>
 
-#include "config/deadeye_config.hpp"
-#include "controller.hpp"
-#include "pipeline/test_pattern_pipeline.hpp"
-
+#include "deadeye.hpp"
 #include "pipeline.hpp"
 
 using namespace deadeye;
+using namespace ded;
 
 namespace {
 void ConfigureLogging() {
@@ -21,14 +18,7 @@ int main(int argc, char** argv) {
   spdlog::info("Deadeye unit {} starting", DEADEYE_UNIT);
 
   try {
-    Controller::Initialize({
-        std::make_unique<TestPatternPipeline>(0),
-        std::make_unique<TestPatternPipeline>(1),
-        std::make_unique<ded::TestPatternPipeline>(2),
-        // std::make_unique<TestPatternPipeline>(3),
-        // std::make_unique<TestPatternPipeline>(4),
-    });
-
+    DEADEYE_INIT()
     Controller::GetInstance().Run();
   } catch (std::exception const& e) {
     spdlog::critical("Controller::Run exception: {}", e.what());
